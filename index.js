@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const axios = require("axios");
 const { Movie, connection } = require("./db");
 
 //Middleware
@@ -23,6 +24,23 @@ app.post("/movies", async(req,res)=>{
    res.send("Posted Data")
 })
 
+//Delete
+app.delete("/movies", async(req,res)=>{
+    console.log("--------------------------------------")
+    console.log(req.body)
+    
+    const newData = Movie.deleteOne()
+    res.send("Deleted Data")
+})
+
+
+app.get("/movies/search/:name", function (req, res) {
+    var regex = new RegExp(req.params.name, "i");
+    Movie.find({ name: regex }).then((result) => {
+
+      res.status(200).json(result);
+    });
+  });
 
 app.listen(8080, async()=>{
     try{
@@ -33,3 +51,15 @@ app.listen(8080, async()=>{
     }
     console.log(`server started at http://localhost:${8080 }`)
 })
+
+
+
+// {
+//     "id": 14,
+//     "name": "Mirzapur",
+//     "image": "xyz image",
+//     "rating": 8,
+//     "duration": 160,
+//     "date": 2018,
+//     "language":"Hindi"
+// }
