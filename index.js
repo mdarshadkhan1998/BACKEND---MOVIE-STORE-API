@@ -52,8 +52,6 @@ app.listen(8080, async()=>{
     console.log(`server started at http://localhost:${8080 }`)
 })
 
-
-
 // {
 //     "id": 14,
 //     "name": "Mirzapur",
